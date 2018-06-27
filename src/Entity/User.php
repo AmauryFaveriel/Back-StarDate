@@ -8,7 +8,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ApiResource
+ * @ApiResource(collectionOperations={
+ *      "get"={"method"="GET"},
+        "post"={"method"="POST", "path"="/register"},
+ *     })
  */
 class User implements UserInterface, \Serializable
 {

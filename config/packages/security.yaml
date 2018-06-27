@@ -13,6 +13,11 @@ security:
 
     firewalls:
 
+        register:
+            pattern: ^/api/register
+            stateless: true
+            anonymous: true
+
         login:
             pattern:  ^/api/login
             stateless: true
@@ -23,6 +28,21 @@ security:
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
 
+        sector:
+            pattern: ^/api/sectors
+            stateless: true
+            anonymous: true
+
+        position:
+            pattern: ^/api/positions
+            stateless: true
+            anonymous: true
+
+        race:
+            pattern: ^/api/races
+            stateless: true
+            anonymous: true
+
         api:
             pattern:   ^/api
             stateless: true
@@ -32,4 +52,8 @@ security:
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/sectors, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/positions, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/races, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
