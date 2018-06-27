@@ -3,3 +3,4 @@ easy_admin:
         - App\Entity\Position
         - App\Entity\Races
         - App\Entity\User
+        - App\Entity\Sector

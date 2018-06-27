@@ -40,6 +40,11 @@ class Position
      */
     private $users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Sector", inversedBy="positions")
+     */
+    private $sector;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -120,5 +125,17 @@ class Position
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getSector(): ?Sector
+    {
+        return $this->sector;
+    }
+
+    public function setSector(?Sector $sector): self
+    {
+        $this->sector = $sector;
+
+        return $this;
     }
 }
