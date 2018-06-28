@@ -4,13 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ApiResource
  */
-class User implements UserInterface, \Serializable
+class User
 {
     /**
      * @ORM\Id()
@@ -43,13 +42,6 @@ class User implements UserInterface, \Serializable
      * @ORM\ManyToOne(targetEntity="App\Entity\Races", inversedBy="users")
      */
     private $race;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     /**
      * @ORM\Column(type="string", length=1500)
@@ -144,26 +136,6 @@ class User implements UserInterface, \Serializable
         $this->race = $race;
 
         return $this;
-    }
-
-    /**
-     * Retourne les rôles de l'user
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-
-        // Afin d'être sûr qu'un user a toujours au moins 1 rôle
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
-        }
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): void
-    {
-        $this->roles = $roles;
     }
 
     /**
